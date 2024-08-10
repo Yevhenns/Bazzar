@@ -1,15 +1,27 @@
 import * as React from 'react';
 import {Button} from '../components/Button';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Input} from '../components/Input';
 import {Wrapper} from '../components/Wrapper';
 import {RegistrationScreenNavigationProp} from '../../App';
+import {useState} from 'react';
+import {useGetContacts} from '../hooks/useGetContacts';
 
 type RegistrationProps = {
   navigation: RegistrationScreenNavigationProp;
 };
 
 export const Registration = ({navigation}: RegistrationProps) => {
+  const [phoneNumber, setPhonenumber] = useState('');
+
+  const contacts = useGetContacts();
+
+  const register = () => {
+    contacts.some(contact => contact.number === phoneNumber)
+      ? Alert.alert('The number already exists')
+      : navigation.navigate('Confirmation');
+  };
+
   return (
     <Wrapper text="Please enter your details.">
       <View style={styles.form}>
@@ -18,12 +30,11 @@ export const Registration = ({navigation}: RegistrationProps) => {
         <Input
           title="Phone number"
           placeholder="+33 222 111 2222"
+          onChangeText={newText => setPhonenumber(newText)}
+          value={phoneNumber}
           keyboardType="phone-pad"
         />
-        <Button
-          title="Continue"
-          onPress={() => navigation.navigate('Confirmation')}
-        />
+        <Button title="Continue" onPress={register} />
       </View>
       <View style={styles.footer}>
         <Text>Do you have an account?</Text>
