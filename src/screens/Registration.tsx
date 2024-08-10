@@ -1,11 +1,18 @@
 import * as React from 'react';
 import {Button} from '../components/Button';
-import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  ActivityIndicator,
+  Alert,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {Input} from '../components/Input';
 import {Wrapper} from '../components/Wrapper';
 import {RegistrationScreenNavigationProp} from '../../App';
 import {useState} from 'react';
-import {useGetContacts} from '../hooks/useGetContacts';
+import {useGetUsers} from '../hooks/useGetContacts';
 
 type RegistrationProps = {
   navigation: RegistrationScreenNavigationProp;
@@ -14,13 +21,21 @@ type RegistrationProps = {
 export const Registration = ({navigation}: RegistrationProps) => {
   const [phoneNumber, setPhonenumber] = useState('');
 
-  const contacts = useGetContacts();
+  const {users, loading, err} = useGetUsers();
 
   const register = () => {
-    contacts.some(contact => contact.number === phoneNumber)
+    users.some(user => user.number === phoneNumber)
       ? Alert.alert('The number already exists')
       : navigation.navigate('Confirmation');
   };
+
+  if (err) {
+    return Alert.alert('Network error');
+  }
+
+  if (loading) {
+    return <ActivityIndicator />;
+  }
 
   return (
     <Wrapper text="Please enter your details.">

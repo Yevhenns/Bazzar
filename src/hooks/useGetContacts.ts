@@ -1,27 +1,32 @@
 import {useEffect, useState} from 'react';
 
-export type Contact = {
+export type User = {
   id: string;
   name: string;
   surname: string;
   number: string;
 };
 
-export const useGetContacts = () => {
-  const [contacts, setContacts] = useState<Contact[]>([]);
+export const useGetUsers = () => {
+  const [users, setUsers] = useState<User[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [err, setError] = useState<null | string>(null);
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
-        const res = await fetch('http://demo8124496.mockable.io/contacts');
+        const res = await fetch('http://demo8124496.mockable.io/users');
         const data = await res.json();
-        setContacts(data.contacts);
+        setUsers(data.contacts);
+        setLoading(false);
       } catch (error: any) {
-        return error.message;
+        setError(error.message);
+        setLoading(false);
       }
     };
     fetchData();
   }, []);
 
-  return contacts;
+  return {users, loading, err};
 };
