@@ -29,12 +29,16 @@ export const Registration = ({navigation}: RegistrationProps) => {
         <Input title="Last name" placeholder="Enter last name" />
         <Input
           title="Phone number"
-          placeholder="+33 222 111 2222"
+          placeholder="+38 099 111 2233"
           onChangeText={newText => setPhonenumber(newText)}
           value={phoneNumber}
           keyboardType="phone-pad"
         />
-        <Button title="Continue" onPress={register} />
+        <Button
+          title="Continue"
+          onPress={register}
+          disabled={phoneNumber.trim().length !== 13}
+        />
       </View>
       <View style={styles.footer}>
         <Text>Do you have an account?</Text>

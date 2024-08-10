@@ -27,12 +27,16 @@ export const Login = ({navigation}: LoginProps) => {
       <View style={styles.form}>
         <Input
           title="Phone number"
-          placeholder="+33 222 111 2222"
+          placeholder="+38 099 111 2233"
           onChangeText={newText => setPhonenumber(newText)}
           value={phoneNumber}
           keyboardType="phone-pad"
         />
-        <Button title="Login" onPress={login} />
+        <Button
+          title="Login"
+          onPress={login}
+          disabled={phoneNumber.trim().length !== 13}
+        />
       </View>
       <View style={styles.footer}>
         <Text>Don’t have an account?</Text>
