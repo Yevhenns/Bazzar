@@ -3,14 +3,23 @@ import {Button} from '../components/Button';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Input} from '../components/Input';
 import {Wrapper} from '../components/Wrapper';
+import {RegistrationScreenNavigationProp} from '../../App';
 
-export const Registration = ({navigation}) => {
+type RegistrationProps = {
+  navigation: RegistrationScreenNavigationProp;
+};
+
+export const Registration = ({navigation}: RegistrationProps) => {
   return (
     <Wrapper text="Please enter your details.">
       <View style={styles.form}>
         <Input title="Name" placeholder="Enter name" />
         <Input title="Last name" placeholder="Enter last name" />
-        <Input title="Phone number" placeholder="+33 222 111 2222" />
+        <Input
+          title="Phone number"
+          placeholder="+33 222 111 2222"
+          keyboardType="phone-pad"
+        />
         <Button
           title="Continue"
           onPress={() => navigation.navigate('Confirmation')}
@@ -31,12 +40,14 @@ const styles = StyleSheet.create({
     display: 'flex',
     gap: 24,
   },
+
   footer: {
     display: 'flex',
     flexDirection: 'row',
     gap: 4,
     justifyContent: 'center',
   },
+
   footerLink: {
     color: 'teal',
     borderBottomWidth: 1,

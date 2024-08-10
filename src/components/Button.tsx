@@ -31,19 +31,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 8,
   },
+
   primary: {
     backgroundColor: 'teal',
   },
+
   outlined: {
     borderColor: 'grey',
     borderWidth: 1,
   },
+
   title: {
     fontSize: 16,
   },
+
   colorBlack: {
     color: 'black',
   },
+
   colorWhite: {
     color: 'white',
   },

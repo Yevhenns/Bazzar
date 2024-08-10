@@ -1,15 +1,38 @@
 import * as React from 'react';
 import {Button} from '../components/Button';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Input} from '../components/Input';
 import {Wrapper} from '../components/Wrapper';
+import {useGetContacts} from '../hooks/useGetContacts';
+import {useState} from 'react';
+import {LoginScreenNavigationProp} from '../../App';
 
-export const Login = ({navigation}) => {
+type LoginProps = {
+  navigation: LoginScreenNavigationProp;
+};
+
+export const Login = ({navigation}: LoginProps) => {
+  const [phoneNumber, setPhonenumber] = useState('');
+
+  const contacts = useGetContacts();
+
+  const login = () => {
+    contacts.some(contact => contact.number === phoneNumber)
+      ? Alert.alert('Login')
+      : Alert.alert("The number doesn't exist");
+  };
+
   return (
     <Wrapper text="Please enter your details.">
       <View style={styles.form}>
-        <Input title="Phone number" placeholder="+33 222 111 2222" />
-        <Button title="Login" onPress={() => console.log('login')} />
+        <Input
+          title="Phone number"
+          placeholder="+33 222 111 2222"
+          onChangeText={newText => setPhonenumber(newText)}
+          value={phoneNumber}
+          keyboardType="phone-pad"
+        />
+        <Button title="Login" onPress={login} />
       </View>
       <View style={styles.footer}>
         <Text>Don’t have an account?</Text>
@@ -26,12 +49,14 @@ const styles = StyleSheet.create({
     display: 'flex',
     gap: 24,
   },
+
   footer: {
     display: 'flex',
     flexDirection: 'row',
     gap: 4,
     justifyContent: 'center',
   },
+
   footerLink: {
     color: 'teal',
     borderBottomWidth: 1,

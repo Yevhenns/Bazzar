@@ -6,11 +6,23 @@ type InputProps = {
   outlined?: boolean;
 } & TextInputProps;
 
-export const Input = ({title, placeholder}: InputProps) => {
+export const Input = ({
+  title,
+  value,
+  onChangeText,
+  placeholder,
+  keyboardType,
+}: InputProps) => {
   return (
     <View>
       <Text style={styles.title}>{title}</Text>
-      <TextInput style={styles.input} placeholder={placeholder} />
+      <TextInput
+        style={styles.input}
+        placeholder={placeholder}
+        value={value}
+        onChangeText={onChangeText}
+        keyboardType={keyboardType}
+      />
     </View>
   );
 };
@@ -26,6 +38,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     paddingHorizontal: 14,
   },
+
   title: {
     fontSize: 12,
   },

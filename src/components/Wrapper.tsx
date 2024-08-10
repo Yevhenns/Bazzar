@@ -25,16 +25,19 @@ const styles = StyleSheet.create({
     display: 'flex',
     gap: 40,
   },
+
   textWrapper: {
     display: 'flex',
     gap: 16,
     alignItems: 'center',
   },
+
   title: {
     color: 'black',
     fontSize: 24,
     fontWeight: '700',
   },
+
   text: {
     fontSize: 16,
     textAlign: 'center',

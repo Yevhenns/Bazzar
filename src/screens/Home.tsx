@@ -2,8 +2,13 @@ import * as React from 'react';
 import {Button} from '../components/Button';
 import {StyleSheet, Text, View} from 'react-native';
 import {Logo} from '../icons/Logo';
+import {HomeScreenNavigationProp} from '../../App';
 
-export const HomeScreen = ({navigation}) => {
+type HomeProps = {
+  navigation: HomeScreenNavigationProp;
+};
+
+export const Home = ({navigation}: HomeProps) => {
   return (
     <View style={styles.container}>
       <Logo />
@@ -33,19 +38,23 @@ const styles = StyleSheet.create({
     display: 'flex',
     gap: 32,
   },
+
   textWrapper: {
     display: 'flex',
     gap: 16,
   },
+
   title: {
     color: 'black',
     fontSize: 32,
     fontWeight: '700',
   },
+
   text: {
     color: 'black',
     fontSize: 16,
   },
+
   buttonsWrapper: {
     display: 'flex',
     gap: 8,

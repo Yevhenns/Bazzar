@@ -25,12 +25,14 @@ const styles = StyleSheet.create({
     display: 'flex',
     gap: 24,
   },
+
   footer: {
     display: 'flex',
     flexDirection: 'row',
     gap: 4,
     justifyContent: 'center',
   },
+
   footerLink: {
     color: 'teal',
     borderBottomWidth: 1,
